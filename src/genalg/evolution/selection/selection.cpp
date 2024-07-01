@@ -4,7 +4,7 @@
 #include <vector>
 
 
-#include "../util/random.hpp"
+#include "util/random.hpp"
 #include "evolution/selection/selection.hpp"
 #include "evolution/interface.hpp"
 
