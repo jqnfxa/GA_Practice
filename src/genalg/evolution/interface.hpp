@@ -27,7 +27,7 @@ class ICrossover
 {
 public:
 	virtual ~ICrossover() = default;
-	virtual generation_t cross(const generation_t &generation, double cross_p) = 0;
+	virtual generation_t cross(const generation_t &generation, double cross_p) const = 0;
 };
 
 
@@ -39,6 +39,6 @@ public:
         explicit IMutation(double left_bound, double right_bound) : left_bound_(left_bound), right_bound_(right_bound) {}
 
 	virtual ~IMutation() = default;
-	virtual generation_t mutate(const generation_t &generation, double cross_p) = 0;
+	virtual generation_t mutate(const generation_t &generation, double cross_p) const = 0;
 };
 
