@@ -78,12 +78,17 @@ set(TEST_SOURCES
     src/genalg/test/runner.cpp
     src/genalg/test/polynomial_test.cpp
     src/genalg/test/generation_test.cpp
-    src/genalg/core/genetic.cpp
-    src/genalg/core/genetic.hpp
+
     src/genalg/core/generation.cpp
     src/genalg/core/generation.hpp
-    src/genalg/structures/polynomial.hpp
-    src/genalg/structures/interface.hpp
+
+    src/genalg/evolution/crossover/crossover.cpp
+    src/genalg/evolution/crossover/crossover.hpp
+    src/genalg/evolution/mutation/mutation.cpp
+    src/genalg/evolution/mutation/mutation.hpp
+    src/genalg/evolution/selection/selection.cpp
+    src/genalg/evolution/selection/selection.hpp
+    src/genalg/evolution/interface.hpp
 )
 
 add_executable(GA_Practice_Tests ${TEST_SOURCES})

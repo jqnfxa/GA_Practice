@@ -2,7 +2,7 @@
 
 #include <cstdint>
 #include <memory>
-#include "../structures/interface.hpp"
+#include "../evolution/interface.hpp"
 
 
 class Generation
