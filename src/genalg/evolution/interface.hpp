@@ -1,5 +1,4 @@
 #pragma once
-
 #include <vector>
 
 
@@ -32,4 +31,12 @@ public:
 
 	virtual ~IMutation() = default;
 	virtual generation_t mutate(const generation_t &generation, double cross_p) = 0;
+};
+
+
+class IEvaluator
+{
+public:
+	virtual ~IEvaluator() = default;
+	virtual double evaluate(const genom_t &genom) = 0;
 };

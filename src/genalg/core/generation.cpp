@@ -9,7 +9,8 @@ Generation::Generation(
 	double cross_p,
 	ISelector *selector,
 	ICrossover *crossover,
-	IMutation *mutator
+	IMutation *mutator,
+	IEvaluator *evaluator
 )
 	: inital_size_(inital_size)
 	, generation_number_(1)
@@ -18,6 +19,7 @@ Generation::Generation(
 	, selector_(selector)
 	, crossover_(crossover)
 	, mutator_(mutator)
+	, evaluator_(evaluator)
 {
 	if (selector == nullptr)
 	{
@@ -33,6 +35,17 @@ Generation::Generation(
 	{
 		throw std::runtime_error("error: invalid mutator");
 	}
+
+	if (evaluator == nullptr)
+	{
+		throw std::runtime_error("error: invalid evaluator");
+	}
+}
+
+
+double Generation::adaptability(genom_t genom) const
+{
+	return evaluator_->evaluate(genom);
 }
 
 

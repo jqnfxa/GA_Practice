@@ -1,8 +1,7 @@
 #pragma once
-
 #include <cstdint>
 #include <memory>
-#include "../evolution/interface.hpp"
+#include "evolution/interface.hpp"
 
 
 class Generation
@@ -16,6 +15,7 @@ class Generation
 	std::unique_ptr<ISelector> selector_;
 	std::unique_ptr<ICrossover> crossover_;
 	std::unique_ptr<IMutation> mutator_;
+	std::unique_ptr<IEvaluator> evaluator_;
 public:
 	Generation(
 		std::size_t inital_size,
@@ -23,10 +23,12 @@ public:
 		double cross_p,
 		ISelector *selector,
 		ICrossover *crossover,
-		IMutation *mutator
+		IMutation *mutator,
+		IEvaluator *evaluator
 	);
 
 
+	[[nodiscard]] double adaptability(genom_t genom) const;
 	[[nodiscard]] std::size_t generation_number() const;
 	[[nodiscard]] generation_t generation() const;
 	void next_generation();

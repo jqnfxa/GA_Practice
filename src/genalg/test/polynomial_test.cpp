@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include "../structures/polynomial.hpp"
+#include "structures/polynomial.hpp"
 
 
 TEST(PolynomialTest, PolynomialCreation)

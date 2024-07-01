@@ -1,4 +1,15 @@
 #pragma once
+#include "structures/polynomial.hpp"
+#include "evolution/polynomial.hpp"
+
+
+class GeneticAlgorithm
+{
+public:
+	GeneticAlgorithm(
+		const Polynomial<genom_t> &polynomial,
+		)
+};
 
 
 class GeneticAlgorithm {
