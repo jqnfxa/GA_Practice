@@ -1,11 +1,12 @@
 #pragma once
 #include "structures/polynomial.hpp"
-#include "evolution/polynomial.hpp"
+#include "evolution/interface.hpp"
+#include "core/generation.hpp"
 
 
 class GeneticAlgorithm
 {
-	Polynomial<genom_t> polynomial_,
+	Polynomial<genom_t> polynomial_;
 	Generation &generation_;
 	std::size_t max_generations_;
 	std::vector<generation_t> generations_;

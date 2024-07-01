@@ -1,3 +1,4 @@
+#include <algorithm>
 #include "genetic.hpp"
 
 
@@ -17,7 +18,7 @@ void GeneticAlgorithm::run()
 	generations_.clear();
 	generations_.push_back(generation_.generation());
 
-        while (generation_.generation_number() < max_generations)
+        while (generation_.generation_number() < max_generations_)
 	{
 		generation_.next_generation();
 		generations_.push_back(generation_.generation());
@@ -25,7 +26,7 @@ void GeneticAlgorithm::run()
 }
 
 
-std::vector<genom_t> GeneticAlgorithm::best_solution(std::size_t generation, std::size_t count = 3) const
+std::vector<genom_t> GeneticAlgorithm::best_solution(std::size_t generation, std::size_t count) const
 {
 	if (generation >= generations_.size())
 	{

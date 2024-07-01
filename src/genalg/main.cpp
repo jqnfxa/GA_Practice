@@ -1,5 +1,11 @@
+#include <iostream>
 #include "structures/polynomial.hpp"
 #include "evolution/interface.hpp"
+#include "evolution/selection/selection.hpp"
+#include "evolution/mutation/mutation.hpp"
+#include "evolution/crossover/crossover.hpp"
+#include "core/generation.hpp"
+#include "core/genetic.hpp"
 
 
 int main()
@@ -14,7 +20,7 @@ int main()
 	std::size_t max_generations = 100;
 
 	Generation generation(
-		inital_size,
+		initial_size,
 		mut_p,
 		cross_p,
 		new RouletteWheel,
