@@ -13,10 +13,10 @@ find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
 
 set(PROJECT_SOURCES
-        main.cpp
-        mainwindow.cpp
-        mainwindow.h
-        mainwindow.ui
+        src/gui/main.cpp
+        src/gui/mainwindow.cpp
+        src/gui/mainwindow.h
+        src/gui/mainwindow.ui
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
@@ -68,3 +68,21 @@ install(TARGETS GA_Practice
 if(QT_VERSION_MAJOR EQUAL 6)
     qt_finalize_executable(GA_Practice)
 endif()
+
+enable_testing()
+
+find_package(GTest REQUIRED)
+include(GoogleTest)
+
+set(TEST_SOURCES
+    src/genalg/test/runner.cpp
+)
+
+add_executable(GA_Practice_Tests ${TEST_SOURCES})
+target_link_libraries(GA_Practice_Tests GTest::GTest GTest::Main)
+
+gtest_discover_tests(GA_Practice_Tests)
+
+install(TARGETS GA_Practice_Tests
+    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+)

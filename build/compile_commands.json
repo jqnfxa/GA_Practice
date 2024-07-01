@@ -1,0 +1,32 @@
+[
+{
+  "directory": "/home/shard/Practice/GA_Practice/build",
+  "command": "/usr/bin/c++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB -I/home/shard/Practice/GA_Practice/build/GA_Practice_autogen/include -isystem /usr/include/x86_64-linux-gnu/qt5 -isystem /usr/include/x86_64-linux-gnu/qt5/QtWidgets -isystem /usr/include/x86_64-linux-gnu/qt5/QtGui -isystem /usr/include/x86_64-linux-gnu/qt5/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -g -std=gnu++17 -fPIC -o CMakeFiles/GA_Practice.dir/GA_Practice_autogen/mocs_compilation.cpp.o -c /home/shard/Practice/GA_Practice/build/GA_Practice_autogen/mocs_compilation.cpp",
+  "file": "/home/shard/Practice/GA_Practice/build/GA_Practice_autogen/mocs_compilation.cpp",
+  "output": "CMakeFiles/GA_Practice.dir/GA_Practice_autogen/mocs_compilation.cpp.o"
+},
+{
+  "directory": "/home/shard/Practice/GA_Practice/build",
+  "command": "/usr/bin/c++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB -I/home/shard/Practice/GA_Practice/build/GA_Practice_autogen/include -isystem /usr/include/x86_64-linux-gnu/qt5 -isystem /usr/include/x86_64-linux-gnu/qt5/QtWidgets -isystem /usr/include/x86_64-linux-gnu/qt5/QtGui -isystem /usr/include/x86_64-linux-gnu/qt5/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -g -std=gnu++17 -fPIC -o CMakeFiles/GA_Practice.dir/src/gui/main.cpp.o -c /home/shard/Practice/GA_Practice/src/gui/main.cpp",
+  "file": "/home/shard/Practice/GA_Practice/src/gui/main.cpp",
+  "output": "CMakeFiles/GA_Practice.dir/src/gui/main.cpp.o"
+},
+{
+  "directory": "/home/shard/Practice/GA_Practice/build",
+  "command": "/usr/bin/c++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB -I/home/shard/Practice/GA_Practice/build/GA_Practice_autogen/include -isystem /usr/include/x86_64-linux-gnu/qt5 -isystem /usr/include/x86_64-linux-gnu/qt5/QtWidgets -isystem /usr/include/x86_64-linux-gnu/qt5/QtGui -isystem /usr/include/x86_64-linux-gnu/qt5/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -g -std=gnu++17 -fPIC -o CMakeFiles/GA_Practice.dir/src/gui/mainwindow.cpp.o -c /home/shard/Practice/GA_Practice/src/gui/mainwindow.cpp",
+  "file": "/home/shard/Practice/GA_Practice/src/gui/mainwindow.cpp",
+  "output": "CMakeFiles/GA_Practice.dir/src/gui/mainwindow.cpp.o"
+},
+{
+  "directory": "/home/shard/Practice/GA_Practice/build",
+  "command": "/usr/bin/c++ -I/home/shard/Practice/GA_Practice/build/GA_Practice_Tests_autogen/include -g -std=gnu++17 -DGTEST_HAS_PTHREAD=1 -o CMakeFiles/GA_Practice_Tests.dir/GA_Practice_Tests_autogen/mocs_compilation.cpp.o -c /home/shard/Practice/GA_Practice/build/GA_Practice_Tests_autogen/mocs_compilation.cpp",
+  "file": "/home/shard/Practice/GA_Practice/build/GA_Practice_Tests_autogen/mocs_compilation.cpp",
+  "output": "CMakeFiles/GA_Practice_Tests.dir/GA_Practice_Tests_autogen/mocs_compilation.cpp.o"
+},
+{
+  "directory": "/home/shard/Practice/GA_Practice/build",
+  "command": "/usr/bin/c++ -I/home/shard/Practice/GA_Practice/build/GA_Practice_Tests_autogen/include -g -std=gnu++17 -DGTEST_HAS_PTHREAD=1 -o CMakeFiles/GA_Practice_Tests.dir/src/genalg/test/runner.cpp.o -c /home/shard/Practice/GA_Practice/src/genalg/test/runner.cpp",
+  "file": "/home/shard/Practice/GA_Practice/src/genalg/test/runner.cpp",
+  "output": "CMakeFiles/GA_Practice_Tests.dir/src/genalg/test/runner.cpp.o"
+}
+]

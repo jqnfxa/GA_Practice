@@ -1,0 +1,5 @@
+if(EXISTS "/home/shard/Practice/GA_Practice/build/GA_Practice_Tests[1]_tests.cmake")
+  include("/home/shard/Practice/GA_Practice/build/GA_Practice_Tests[1]_tests.cmake")
+else()
+  add_test(GA_Practice_Tests_NOT_BUILT GA_Practice_Tests_NOT_BUILT)
+endif()
