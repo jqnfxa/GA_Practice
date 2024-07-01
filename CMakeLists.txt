@@ -77,8 +77,11 @@ include(GoogleTest)
 set(TEST_SOURCES
     src/genalg/test/runner.cpp
     src/genalg/test/polynomial_test.cpp
+    src/genalg/test/generation_test.cpp
     src/genalg/core/genetic.cpp
     src/genalg/core/genetic.hpp
+    src/genalg/core/generation.cpp
+    src/genalg/core/generation.hpp
     src/genalg/structures/polynomial.hpp
     src/genalg/structures/interface.hpp
 )
