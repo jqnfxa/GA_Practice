@@ -24,7 +24,9 @@ public:
 		ISelector *selector,
 		ICrossover *crossover,
 		IMutation *mutator,
-		IEvaluator *evaluator
+		IEvaluator *evaluator,
+		double left,
+		double right
 	);
 
 

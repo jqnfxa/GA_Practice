@@ -3,7 +3,6 @@
 #include <algorithm>
 #include <vector>
 
-
 #include "util/random.hpp"
 #include "evolution/selection/selection.hpp"
 #include "evolution/interface.hpp"
@@ -14,11 +13,17 @@ generation_t RouletteWheel::select(const generation_t &generation, const IEvalua
     std::vector<double> relative_percent;
     double sum_adaptability = 0.0;
     double temp = 0.0;
+    double min_value = std::numeric_limits<double>::max();
+
+    for (const auto &gen : generation)
+    {
+        min_value = std::min(min_value, evaluator->evaluate(gen));
+    }
 
     //Calculation of generational fitness
     for (const auto &gen : generation)
     {
-        temp = evaluator->evaluate(gen);
+        temp = evaluator->evaluate(gen) - min_value;
         adaptability_arr.push_back(temp);
         sum_adaptability += temp;
     }
@@ -41,7 +46,7 @@ generation_t RouletteWheel::select(const generation_t &generation, const IEvalua
     int end_parents = generation.size() * 0.7;
     for (std::size_t i = 0; i < end_parents; i++)
     {
-        double randomValue = random<double>(0, 1);
+        double randomValue = random<double>(cumulativePercent.front(), cumulativePercent.back());
         auto it = std::lower_bound(cumulativePercent.begin(), cumulativePercent.end(), randomValue);
         if (it != cumulativePercent.end())
         {

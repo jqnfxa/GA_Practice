@@ -1,6 +1,6 @@
 #include <stdexcept>
 #include "generation.hpp"
-#include "../util/random.hpp"
+#include "util/random.hpp"
 
 
 Generation::Generation(
@@ -10,7 +10,9 @@ Generation::Generation(
 	ISelector *selector,
 	ICrossover *crossover,
 	IMutation *mutator,
-	IEvaluator *evaluator
+	IEvaluator *evaluator,
+	double left,
+	double right
 )
 	: inital_size_(inital_size)
 	, generation_number_(1)
@@ -39,6 +41,11 @@ Generation::Generation(
 	if (evaluator == nullptr)
 	{
 		throw std::runtime_error("error: invalid evaluator");
+	}
+
+	for (std::size_t i = 0; i < inital_size; ++i)
+	{
+		generation_.push_back(random<genom_t>(left, right));
 	}
 }
 
