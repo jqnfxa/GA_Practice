@@ -97,3 +97,28 @@ target_include_directories(GA_Practice_Tests PRIVATE src/genalg)
 target_link_libraries(GA_Practice_Tests PRIVATE GTest::GTest GTest::Main Qt${QT_VERSION_MAJOR}::Widgets)
 
 gtest_discover_tests(GA_Practice_Tests)
+
+
+set(GA_SOURCES
+    src/genalg/main.cpp
+
+    src/genalg/core/generation.cpp
+    src/genalg/core/generation.hpp
+    src/genalg/core/genetic.cpp
+    src/genalg/core/genetic.hpp
+
+    src/genalg/evolution/crossover/crossover.cpp
+    src/genalg/evolution/crossover/crossover.hpp
+    src/genalg/evolution/evaluator/evaluator.cpp
+    src/genalg/evolution/evaluator/evaluator.hpp
+    src/genalg/evolution/mutation/mutation.cpp
+    src/genalg/evolution/mutation/mutation.hpp
+    src/genalg/evolution/selection/selection.cpp
+    src/genalg/evolution/selection/selection.hpp
+    src/genalg/evolution/interface.hpp
+
+    src/genalg/structures/polynomial.hpp
+)
+
+add_executable(GA_example ${GA_SOURCES})
+target_include_directories(GA_example PRIVATE src/genalg)
