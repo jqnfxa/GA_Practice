@@ -76,13 +76,16 @@ include(GoogleTest)
 
 set(TEST_SOURCES
     src/genalg/test/runner.cpp
+    src/genalg/test/polynomial_test.cpp
+    src/genalg/core/genetic.cpp
+    src/genalg/core/genetic.hpp
+    src/genalg/structures/polynomial.hpp
+    src/genalg/structures/interface.hpp
 )
 
 add_executable(GA_Practice_Tests ${TEST_SOURCES})
-target_link_libraries(GA_Practice_Tests GTest::GTest GTest::Main)
+
+target_include_directories(GA_Practice_Tests PRIVATE src/genalg)
+target_link_libraries(GA_Practice_Tests PRIVATE GTest::GTest GTest::Main Qt${QT_VERSION_MAJOR}::Widgets)
 
 gtest_discover_tests(GA_Practice_Tests)
-
-install(TARGETS GA_Practice_Tests
-    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
-)
