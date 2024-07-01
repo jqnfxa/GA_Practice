@@ -1,6 +1,6 @@
 #pragma once
 
-#include <set>
+#include <vector>
 
 
 using genom_t = double;
@@ -11,5 +11,5 @@ class ISelector
 {
 public:
 	virtual ~ISelector() = default;
-	virtual generation_t select(const generation_t &generation) = 0;
+	virtual generation_t select(const generation_t &generation, double mut_p, double cross_p) = 0;
 };
