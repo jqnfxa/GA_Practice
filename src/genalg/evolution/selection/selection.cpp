@@ -11,7 +11,7 @@
 
 generation_t RouletteWheel::select(const generation_t &generation, const IEvaluator *evaluator){
     std::vector<genom_t> adaptability_arr;
-    std::vector<int> relative_percent;
+    std::vector<double> relative_percent;
     double sum_adaptability = 0.0;
     double temp = 0.0;
 
@@ -26,10 +26,10 @@ generation_t RouletteWheel::select(const generation_t &generation, const IEvalua
     //Calculating relative probability
     for (std::size_t i = 0; i < generation.size(); ++i)
     {
-        relative_percent.push_back(static_cast<int>((adaptability_arr[i] / sum_adaptability) * 100));
+        relative_percent.push_back(adaptability_arr[i] / sum_adaptability);
     }
-    
-    std::vector<int> cumulativePercent(relative_percent.size());
+
+    std::vector<double> cumulativePercent(relative_percent.size());
     cumulativePercent[0] = relative_percent[0];
 
     for (std::size_t i = 1; i < relative_percent.size(); ++i)
@@ -38,13 +38,19 @@ generation_t RouletteWheel::select(const generation_t &generation, const IEvalua
     }
 
     generation_t parents;
-
-    for (std::size_t i = 0; i < static_cast<int>(generation.size() * 0.7); i++)
+    int end_parents = generation.size() * 0.7;
+    for (std::size_t i = 0; i < end_parents; i++)
     {
-        int randomValue = random((int) 1, (int) 100);
+        double randomValue = random<double>(0, 1);
         auto it = std::lower_bound(cumulativePercent.begin(), cumulativePercent.end(), randomValue);
-        int index = std::distance(cumulativePercent.begin(), it);
-        parents.push_back(generation[index]);
+        if (it != cumulativePercent.end())
+        {
+            int index = std::distance(cumulativePercent.begin(), it);
+            parents.push_back(generation[index]);
+        }
+        else
+            parents.push_back(generation.back());
+
     }
 
     return parents;
