@@ -9,7 +9,7 @@ Polynomial::Polynomial(const std::vector<double> &coefficients)
 double Polynomial::operator()(double x) const
 {
 	double value{0.0};
-	double power = 1;
+	double power{1};
 
 	for (const auto &coefficient : coefficients_)
 	{
