@@ -63,7 +63,7 @@ generation_t Generation::generation() const
 
 void Generation::next_generation()
 {
-	generation_ = selector_->select(generation_);
+	generation_ = selector_->select(generation_, evaluator_.get());
 	generation_ = crossover_->cross(generation_, cross_p_);
 	generation_ = mutator_->mutate(generation_, mut_p_);
 	++generation_number_;

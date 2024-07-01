@@ -6,11 +6,20 @@ using genom_t = double;
 using generation_t = std::vector<genom_t>;
 
 
+
+class IEvaluator
+{
+public:
+	virtual ~IEvaluator() = default;
+	virtual double evaluate(const genom_t &genom) const = 0;
+};
+
+
 class ISelector
 {
 public:
 	virtual ~ISelector() = default;
-	virtual generation_t select(const generation_t &generation) = 0;
+	virtual generation_t select(const generation_t &generation, const IEvaluator *evaluator) = 0;
 };
 
 
@@ -33,10 +42,3 @@ public:
 	virtual generation_t mutate(const generation_t &generation, double cross_p) = 0;
 };
 
-
-class IEvaluator
-{
-public:
-	virtual ~IEvaluator() = default;
-	virtual double evaluate(const genom_t &genom) = 0;
-};
