@@ -18,7 +18,7 @@ int main()
 		mut_p,
 		cross_p,
 		new RouletteWheel,
-		new SinglePointCrossing,
+		new MixerCrossover(0.5, left, right),
 		new SubstanceMutation(left, right),
 		new PolynomialEvaluator(polynomial)
 	);
