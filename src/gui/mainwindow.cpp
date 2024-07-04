@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "./ui_mainwindow.h"
+#include <cmath>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -65,14 +66,6 @@ void MainWindow::randomFill()
     ui->startamount->setText(QString::number(rand()%100));
     ui->mixchance->setText(QString::number(rand()%100));
     ui->mutationchance->setText(QString::number(rand()%100));
-
-
-    plot->xAxis->setRange(-10, 20);
-    plot->yAxis->setRange(-10, 20);
-    plot->replot();
-    //ui->layout = new QVBoxLayout();
-    //ui->layout->removeWidget(plot);
-    //plot->setVisible(true);
 }
 
 void MainWindow::fillFromFile()
@@ -145,7 +138,26 @@ void MainWindow::on_solveButton_clicked()
     genAmount = ui->genamount->toPlainText().toInt();
     if (genAmount <= 0) genAmount = 10;
 
+    //подключение либу
+    //делаю тут объект geneticalgorithm с этими кэфами
+    //метод run который возвращает массив всех экстремумов, где каждый экстремум массив всех поколений
+    //мы это сохраняем для отрисовки
+    //c помощью метода best solutions получаем три лучших решения
+    //берем accuracy как среднее на поколение
 
+
+    QVector<double> x,y;
+    for(double i = rangeLeft; i < rangeRight; i += 0.01)
+    {
+        double temp = coefs[0]+coefs[1]*i+coefs[2]*pow(i, 2)+coefs[3]*pow(i, 3)+coefs[4]*pow(i, 4)+coefs[5]*pow(i, 5);
+        x.push_back(i);
+        y.push_back(temp);
+    }
+
+    plot->addGraph();
+    plot->graph(0)->setData(x, y);
+    plot->xAxis->setRange(rangeLeft, rangeRight);
+    plot->replot();
 
     // go to solution process step
     process->setGenAmount(genAmount);
@@ -197,10 +209,10 @@ void MainWindow::on_drawReaden_clicked()
     if (genAmount <= 0) genAmount = 10;
 
     QVector<double> x,y;
-    for(int i = rangeLeft; i < rangeRight; i++)
+    for(double i = rangeLeft; i < rangeRight; i += 0.01)
     {
-        double temp = 100*i*i;
-        x.push_back(temp);
+        double temp = coefs[0]+coefs[1]*i+coefs[2]*pow(i, 2)+coefs[3]*pow(i, 3)+coefs[4]*pow(i, 4)+coefs[5]*pow(i, 5);
+        x.push_back(i);
         y.push_back(temp);
     }
 

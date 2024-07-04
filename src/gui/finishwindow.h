@@ -3,6 +3,7 @@
 
 
 #include <QWidget>
+#include "qcustomplot.h"
 
 namespace Ui {
 class FinishWindow;
@@ -24,6 +25,7 @@ private slots:
 
 private:
     Ui::FinishWindow *ui;
+    QCustomPlot *plot;
 };
 
 

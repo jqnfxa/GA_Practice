@@ -4,6 +4,7 @@
 
 #include <QWidget>
 #include "finishwindow.h"
+#include "qcustomplot.h"
 
 namespace Ui {
 class ProcessWindow;
@@ -18,6 +19,7 @@ public:
 
     explicit ProcessWindow(QWidget *parent = 0);
     void setGenAmount(int amount);
+    void setPlotPolinom(QCustomPlot *newPlot);
     ~ProcessWindow();
 
 
@@ -30,6 +32,8 @@ private slots:
 
 private:
     Ui::ProcessWindow *ui;
+    QCustomPlot *plotPolinom;
+    QCustomPlot *plotEvalFunc;
     FinishWindow *finish;
 
 };

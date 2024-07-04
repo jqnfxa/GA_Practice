@@ -8,8 +8,10 @@ FinishWindow::FinishWindow(QWidget *parent) :
     ui->setupUi(this);
     this->setStyleSheet("background-color: white;");
     ui->solution->setStyleSheet("background-color: white; border: 2px solid rgb(43, 104, 255);");
-    ui->qualityGraphVis->setStyleSheet("background-color: white; border: 2px solid rgb(43, 104, 255);");
     ui->closeSolutionButton->setStyleSheet("background-color: white; border: 2px solid rgb(43, 104, 255);");
+
+    plot = new QCustomPlot();
+    ui->layoutEval->addWidget(plot, 0);
 }
 
 FinishWindow::~FinishWindow()

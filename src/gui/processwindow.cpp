@@ -10,10 +10,14 @@ ProcessWindow::ProcessWindow(QWidget *parent) :
     ui->prevGenButton->setStyleSheet("background-color: white; color: rgb(43, 104, 255);");
     ui->nextGenButton->setStyleSheet("background-color: white; color: rgb(43, 104, 255);");
     ui->goToFinishButton->setStyleSheet("background-color: white; border: 2px solid rgb(43, 104, 255);");
-    ui->graphicsView->setStyleSheet("background-color: white; border: 2px solid rgb(43, 104, 255);");
-    ui->graphicsView_2->setStyleSheet("background-color: white; border: 2px solid rgb(43, 104, 255);");
     finish = new FinishWindow();
     connect(finish, &FinishWindow::closeSolution, this, &ProcessWindow::close);
+
+    plotPolinom = new QCustomPlot();
+    ui->layoutPolinom->addWidget(plotPolinom, 0);
+
+    plotEvalFunc = new QCustomPlot();
+    ui->layoutEval->addWidget(plotEvalFunc, 0);
 
     curAmount = 0;
     genAmount = curAmount;
@@ -28,6 +32,11 @@ ProcessWindow::~ProcessWindow()
 void ProcessWindow::setGenAmount(int amount)
 {
     genAmount = amount;
+}
+
+void ProcessWindow::setPlotPolinom(QCustomPlot *newPlot)
+{
+
 }
 
 void ProcessWindow::on_goToFinishButton_clicked()
