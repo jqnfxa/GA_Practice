@@ -45,7 +45,7 @@ int main()
 				std::cout << individual << ' ';
 			}
 
-			std::cout << ' ' << generation_report.accuracy() << '\n';
+			std::cout << ' ' << generation_report.accuracy(maximum.back().best_solution().back()) << '\n';
 		}
 
 		std::cout << "\n\n\n\n";

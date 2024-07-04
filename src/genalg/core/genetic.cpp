@@ -11,9 +11,14 @@ GeneticAlgorithmReport::GeneticAlgorithmReport(
 	, best_individuals_(best_individuals) {}
 
 
-double GeneticAlgorithmReport::accuracy() const
+double GeneticAlgorithmReport::accuracy(double best) const
 {
-	return 0.0;
+	double sum_accuracy = 0;
+	for (const auto gen : best_individuals_)
+	{	
+		sum_accuracy += std::fabs(best - gen)/(std::fabs(best) + std::fabs(gen));
+	}
+	return 1.0 - sum_accuracy/best_individuals_.size();
 }
 
 

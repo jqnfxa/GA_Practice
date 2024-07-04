@@ -10,7 +10,7 @@ class GeneticAlgorithmReport
 	generation_t generation_;
 public:
 	explicit GeneticAlgorithmReport(const generation_t &generation, const generation_t &best_individuals);
-	double accuracy() const;
+	double accuracy(double best) const;
 	generation_t best_solution() const;
 };
 
