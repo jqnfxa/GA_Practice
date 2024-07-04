@@ -7,4 +7,5 @@ class RouletteWheel: public ISelector
 {
 public:
     generation_t select(const generation_t &generation, const IEvaluator *evaluator) final;
+    RouletteWheel *clone() const final;
 };

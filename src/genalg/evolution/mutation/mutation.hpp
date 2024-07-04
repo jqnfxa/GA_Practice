@@ -10,4 +10,5 @@ class SubstanceMutation: public IMutation
 public:
     SubstanceMutation(double left_bound, double right_bound);
     generation_t mutate(const generation_t &generation, double cross_p) const override;
+    SubstanceMutation *clone() const final;
 };

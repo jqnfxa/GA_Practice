@@ -1,6 +1,6 @@
 
 
-#include "evolution/mutation/mutation.hpp" 
+#include "evolution/mutation/mutation.hpp"
 #include "util/random.hpp"
 
 SubstanceMutation::SubstanceMutation(double left_bound, double right_bound) : IMutation(left_bound, right_bound) {}
@@ -24,4 +24,10 @@ generation_t SubstanceMutation::mutate(const generation_t &generation, double cr
         }
     }
     return mutate_individual;
+}
+
+
+SubstanceMutation *SubstanceMutation::clone() const
+{
+	return new SubstanceMutation(left_bound_, right_bound_);
 }
