@@ -9,7 +9,7 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets LinguistTools Core Gui PrintSupport)
+find_package(QT NAMES Qt5 REQUIRED COMPONENTS Widgets LinguistTools Core Gui PrintSupport)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets LinguistTools Core Gui PrintSupport)
 
 set(TS_FILES ga_practice_6_ru_RU.ts)
@@ -101,6 +101,8 @@ set(TEST_SOURCES
 src/genalg/test/runner.cpp
     src/genalg/test/polynomial_test.cpp
     src/genalg/test/generation_test.cpp
+    src/genalg/test/mutation_test.cpp
+    src/genalg/test/crossover_test.cpp
 
     src/genalg/core/generation.cpp
     src/genalg/core/generation.hpp
