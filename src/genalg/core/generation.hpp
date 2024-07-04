@@ -16,6 +16,10 @@ class Generation
 	std::unique_ptr<ICrossover> crossover_;
 	std::unique_ptr<IMutation> mutator_;
 	std::unique_ptr<IEvaluator> evaluator_;
+
+	double left_;
+	double right_;
+	void generate_first_generation();
 public:
 	Generation(
 		std::size_t inital_size,
@@ -33,5 +37,6 @@ public:
 	[[nodiscard]] double adaptability(genom_t genom) const;
 	[[nodiscard]] std::size_t generation_number() const;
 	[[nodiscard]] generation_t generation() const;
+	void reset_generation_number();
 	void next_generation();
 };

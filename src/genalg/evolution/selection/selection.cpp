@@ -43,7 +43,7 @@ generation_t RouletteWheel::select(const generation_t &generation, const IEvalua
     }
 
     generation_t parents;
-    int end_parents = generation.size() * 0.7;
+    int end_parents = generation.size() > 100 ? generation.size() * 0.6 : generation.size();
     for (std::size_t i = 0; i < end_parents; i++)
     {
         double randomValue = random<double>(cumulativePercent.front(), cumulativePercent.back());
@@ -59,4 +59,10 @@ generation_t RouletteWheel::select(const generation_t &generation, const IEvalua
     }
 
     return parents;
+}
+
+
+RouletteWheel *RouletteWheel::clone() const
+{
+	return new RouletteWheel;
 }

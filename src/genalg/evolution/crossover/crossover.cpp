@@ -43,3 +43,9 @@ genom_t MixerCrossover::mix(genom_t parent_a, genom_t parent_b) const
 
 	return random<double>(left_bound, right_bound);
 }
+
+
+MixerCrossover *MixerCrossover::clone() const
+{
+	return new MixerCrossover(alpha_, left_bound_, right_bound_);
+}
