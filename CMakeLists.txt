@@ -15,25 +15,24 @@ find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets LinguistTools Cor
 set(TS_FILES ga_practice_6_ru_RU.ts)
 
 set(PROJECT_SOURCES
-        main.cpp
-        mainwindow.cpp
-        mainwindow.h
-        mainwindow.ui
-        ${TS_FILES}
+	src/gui/main.cpp
+	src/gui/mainwindow.cpp
+	src/gui/mainwindow.h
+	src/gui/mainwindow.ui
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(ga_practice_6
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
-        processwindow.cpp
-        processwindow.h
-        processwindow.ui
-        finishwindow.ui
-        finishwindow.h
-        finishwindow.cpp
-        qcustomplot.h
-        qcustomplot.cpp
+	src/gui/processwindow.cpp
+	src/gui/processwindow.h
+	src/gui/processwindow.ui
+	src/gui/finishwindow.ui
+	src/gui/finishwindow.h
+	src/gui/finishwindow.cpp
+	src/gui/qcustomplot.h
+	src/gui/qcustomplot.cpp
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET ga_practice_6 APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
@@ -51,14 +50,14 @@ else()
     else()
         add_executable(ga_practice_6
             ${PROJECT_SOURCES}
-            processwindow.cpp
-            processwindow.h
-            processwindow.ui
-            finishwindow.ui
-            finishwindow.h
-            finishwindow.cpp
-            qcustomplot.h
-            qcustomplot.cpp
+            src/gui/processwindow.cpp
+            src/gui/processwindow.h
+            src/gui/processwindow.ui
+            src/gui/finishwindow.ui
+            src/gui/finishwindow.h
+            src/gui/finishwindow.cpp
+            src/gui/qcustomplot.h
+            src/gui/qcustomplot.cpp
         )
     endif()
 
@@ -99,50 +98,50 @@ find_package(GTest REQUIRED)
 include(GoogleTest)
 
 set(TEST_SOURCES
-    ../genalg/test/runner.cpp
-    ../genalg/test/polynomial_test.cpp
-    ../genalg/test/generation_test.cpp
+src/genalg/test/runner.cpp
+    src/genalg/test/polynomial_test.cpp
+    src/genalg/test/generation_test.cpp
 
-    ../genalg/core/generation.cpp
-    ../genalg/core/generation.hpp
+    src/genalg/core/generation.cpp
+    src/genalg/core/generation.hpp
 
-    ../genalg/evolution/crossover/crossover.cpp
-    ../genalg/evolution/crossover/crossover.hpp
-    ../genalg/evolution/mutation/mutation.cpp
-    ../genalg/evolution/mutation/mutation.hpp
-    ../genalg/evolution/selection/selection.cpp
-    ../genalg/evolution/selection/selection.hpp
-    ../genalg/evolution/interface.hpp
+    src/genalg/evolution/crossover/crossover.cpp
+    src/genalg/evolution/crossover/crossover.hpp
+    src/genalg/evolution/mutation/mutation.cpp
+    src/genalg/evolution/mutation/mutation.hpp
+    src/genalg/evolution/selection/selection.cpp
+    src/genalg/evolution/selection/selection.hpp
+    src/genalg/evolution/interface.hpp
 )
 
 add_executable(GA_Practice_Tests ${TEST_SOURCES})
 
-target_include_directories(GA_Practice_Tests PRIVATE ../genalg)
+target_include_directories(GA_Practice_Tests PRIVATE src/genalg)
 target_link_libraries(GA_Practice_Tests PRIVATE GTest::GTest GTest::Main Qt${QT_VERSION_MAJOR}::Widgets)
 
 gtest_discover_tests(GA_Practice_Tests)
 
 
 set(GA_SOURCES
-	../genalg/main.cpp
+src/genalg/main.cpp
 
-	../genalg/core/generation.cpp
-	../genalg/core/generation.hpp
-	../genalg/core/genetic.cpp
-	../genalg/core/genetic.hpp
+	src/genalg/core/generation.cpp
+	src/genalg/core/generation.hpp
+	src/genalg/core/genetic.cpp
+	src/genalg/core/genetic.hpp
 
-	../genalg/evolution/crossover/crossover.cpp
-	../genalg/evolution/crossover/crossover.hpp
-	../genalg/evolution/evaluator/evaluator.cpp
-	../genalg/evolution/evaluator/evaluator.hpp
-	../genalg/evolution/mutation/mutation.cpp
-	../genalg/evolution/mutation/mutation.hpp
-	../genalg/evolution/selection/selection.cpp
-	../genalg/evolution/selection/selection.hpp
-	../genalg/evolution/interface.hpp
+	src/genalg/evolution/crossover/crossover.cpp
+	src/genalg/evolution/crossover/crossover.hpp
+	src/genalg/evolution/evaluator/evaluator.cpp
+	src/genalg/evolution/evaluator/evaluator.hpp
+	src/genalg/evolution/mutation/mutation.cpp
+	src/genalg/evolution/mutation/mutation.hpp
+	src/genalg/evolution/selection/selection.cpp
+	src/genalg/evolution/selection/selection.hpp
+	src/genalg/evolution/interface.hpp
 
-	../genalg/structures/polynomial.hpp
+	src/genalg/structures/polynomial.hpp
 )
 
 add_executable(GA_example ${GA_SOURCES})
-target_include_directories(GA_example PRIVATE ../genalg)
+target_include_directories(GA_example PRIVATE src/genalg)
