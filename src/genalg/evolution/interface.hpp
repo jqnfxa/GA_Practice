@@ -6,16 +6,25 @@ using genom_t = double;
 using generation_t = std::vector<genom_t>;
 
 
+class IClonable
+{
+public:
+	virtual ~IClonable() = default;
+	virtual IClonable *clone() const = 0;
+};
 
-class IEvaluator
+
+class IEvaluator : public IClonable
 {
 public:
 	virtual ~IEvaluator() = default;
 	virtual double evaluate(const genom_t &genom) const = 0;
+	virtual void add_constraint(const genom_t &genom) = 0;
+	virtual void reset_constraints() = 0;
 };
 
 
-class ISelector
+class ISelector : public IClonable
 {
 public:
 	virtual ~ISelector() = default;
@@ -23,7 +32,7 @@ public:
 };
 
 
-class ICrossover
+class ICrossover : public IClonable
 {
 public:
 	virtual ~ICrossover() = default;
@@ -31,7 +40,7 @@ public:
 };
 
 
-class IMutation
+class IMutation : public IClonable
 {
 	double left_bound_;
 	double right_bound_;
