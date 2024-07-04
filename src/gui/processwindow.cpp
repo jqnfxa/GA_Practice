@@ -28,8 +28,6 @@ ProcessWindow::~ProcessWindow()
 void ProcessWindow::setGenAmount(int amount)
 {
     genAmount = amount;
-
-    qDebug() << QString::number(genAmount);
 }
 
 void ProcessWindow::on_goToFinishButton_clicked()
@@ -41,8 +39,6 @@ void ProcessWindow::on_goToFinishButton_clicked()
 void ProcessWindow::on_nextGenButton_clicked()
 {
     if (curAmount == genAmount) return;
-
-    qDebug() << QString::number(curAmount) << " " << QString::number(genAmount);
 
     curAmount++;
     ui->genNum->setText(QString::number(curAmount));
