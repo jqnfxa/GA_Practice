@@ -22,6 +22,8 @@ Generation::Generation(
 	, crossover_(crossover)
 	, mutator_(mutator)
 	, evaluator_(evaluator)
+	, left_(left)
+	, right_(right)
 {
 	if (selector == nullptr)
 	{
@@ -43,9 +45,16 @@ Generation::Generation(
 		throw std::runtime_error("error: invalid evaluator");
 	}
 
-	for (std::size_t i = 0; i < inital_size; ++i)
+	reset_generation_number();
+}
+
+
+void Generation::generate_first_generation()
+{
+	generation_.clear();
+	for (std::size_t i = 0; i < inital_size_; ++i)
 	{
-		generation_.push_back(random<genom_t>(left, right));
+		generation_.push_back(random<genom_t>(left_, right_));
 	}
 }
 
@@ -74,4 +83,11 @@ void Generation::next_generation()
 	generation_ = crossover_->cross(generation_, cross_p_);
 	generation_ = mutator_->mutate(generation_, mut_p_);
 	++generation_number_;
+}
+
+
+void Generation::reset_generation_number()
+{
+	generation_number_ = 1;
+	generate_first_generation();
 }
