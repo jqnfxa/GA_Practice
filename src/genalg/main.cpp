@@ -10,44 +10,45 @@
 
 int main()
 {
-	// P(x) = -x^2
-	Polynomial<genom_t> polynomial({1, -1, 1, 1, -1});
-	double left = -2;
-	double right = 2;
-	double mut_p = 0.6;
-	double cross_p = 0.6;
-	std::size_t initial_size = 100;
-	std::size_t max_generations = 15;
-
-	Generation generation(
-		initial_size,
-		mut_p,
-		cross_p,
-		new RouletteWheel,
-		new MixerCrossover(0.5, left, right),
-		new SubstanceMutation(left, right),
-		new PolynomialEvaluator(polynomial),
-		left,
-		right
-	);
+	// P(x) = -x^4+x^3+2x^2-x+1
+	//Polynomial<genom_t> polynomial({1, -1, 2, 1, -1});
+	Polynomial<genom_t> polynomial({-1, -1, 2, 3, -1, -1});
+	double left = -3;
+	double right = 3;
+	double mut_p = 0.7;
+	double cross_p = 0.7;
+	std::size_t initial_size = 50;
+	std::size_t max_generations = 20;
 
 	GeneticAlgorithm algorithm(
-		polynomial,
-		generation,
-		max_generations
+		initial_size,
+		max_generations,
+                mut_p,
+                cross_p,
+                new RouletteWheel,
+                new MixerCrossover(0.5, left, right),
+		new SubstanceMutation(left, right),
+                new PolynomialEvaluator(polynomial),
+		left,
+		right,
+		polynomial
 	);
 
-	algorithm.run();
-	for (std::size_t i = 0; i < max_generations; ++i)
-	{
-		auto best_solution = algorithm.best_solution(i, 3);
+	const auto report = algorithm.run(4);
 
-		std::cout << "gen: " << i + 1 << '\n';
-		for (const auto &individual : best_solution)
+	for (const auto &maximum : report)
+	{
+		for (const auto &generation_report : maximum)
 		{
-			std::cout << individual << ' ' << polynomial(individual) << '\n';
+			for (const auto &individual : generation_report.best_solution())
+			{
+				std::cout << individual << ' ';
+			}
+
+			std::cout << ' ' << generation_report.accuracy() << '\n';
 		}
-		std::cout << '\n';
+
+		std::cout << "\n\n\n\n";
 	}
 
 	return 0;
