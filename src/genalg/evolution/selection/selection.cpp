@@ -60,3 +60,40 @@ generation_t RouletteWheel::select(const generation_t &generation, const IEvalua
 
     return parents;
 }
+
+
+generation_t RankedSelection::select(const generation_t &generation, const IEvaluator *evaluator){
+    std::vector<std::pair<double, genom_t>> adaptability_arr; //y x
+    std::vector<double> cumulativePercent(generation.size()); //percent
+
+    for (const auto &gen : generation)
+    {   
+        adaptability_arr.emplace_back(evaluator->evaluate(gen), gen);
+    }
+
+    std::sort(adaptability_arr.begin(), adaptability_arr.end());
+
+    double sum_rank = ((1.0 + generation.size())/2.0) * (generation.size());
+    cumulativePercent[0] = 1.0/sum_rank;
+    for (std::size_t i = 1; i < generation.size(); i++)
+    {
+        cumulativePercent[i] = cumulativePercent[i - 1] + (1.0 * (i+1))/sum_rank;
+    }
+
+    generation_t parents;
+    std::size_t end_parents = generation.size() * 0.7;
+    for (std::size_t i = 0; i < end_parents; i++)
+    {
+        double randomValue = random<double>(cumulativePercent.front(), cumulativePercent.back());
+        auto it = std::lower_bound(cumulativePercent.begin(), cumulativePercent.end(), randomValue);
+        if (it != cumulativePercent.end())
+        {
+            int index = std::distance(cumulativePercent.begin(), it);
+            parents.push_back(adaptability_arr[index].second);
+        }
+        else
+            parents.push_back(adaptability_arr.back().second);
+    }
+    
+    return parents;
+}

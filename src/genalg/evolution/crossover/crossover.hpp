@@ -13,3 +13,12 @@ public:
 	generation_t cross(const generation_t &generation, double cross_p) const final;
 	genom_t mix(genom_t parent_a, genom_t parent_b) const;
 };
+
+class SimulatedBinaryCross : public ICrossover
+{
+	double beta_;
+	double left_bound_;
+	double right_bound_;
+public:
+	SimulatedBinaryCross(double beta_, double left, double right);
+};

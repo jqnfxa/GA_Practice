@@ -12,18 +12,18 @@ int main()
 {
 	// P(x) = -x^2
 	Polynomial<genom_t> polynomial({1, -1, 1, 1, -1});
-	double left = -2;
-	double right = 2;
-	double mut_p = 0.6;
-	double cross_p = 0.6;
-	std::size_t initial_size = 100;
-	std::size_t max_generations = 15;
+	double left = 0;
+	double right = 30;
+	double mut_p = 0.8;
+	double cross_p = 0.8;
+	std::size_t initial_size = 40;
+	std::size_t max_generations = 10;
 
 	Generation generation(
 		initial_size,
 		mut_p,
 		cross_p,
-		new RouletteWheel,
+		new RankedSelection,
 		new MixerCrossover(0.5, left, right),
 		new SubstanceMutation(left, right),
 		new PolynomialEvaluator(polynomial),
