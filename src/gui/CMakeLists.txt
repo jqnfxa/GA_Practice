@@ -91,3 +91,58 @@ install(TARGETS ga_practice_6
 if(QT_VERSION_MAJOR EQUAL 6)
     qt_finalize_executable(ga_practice_6)
 endif()
+
+
+enable_testing()
+
+find_package(GTest REQUIRED)
+include(GoogleTest)
+
+set(TEST_SOURCES
+    ../genalg/test/runner.cpp
+    ../genalg/test/polynomial_test.cpp
+    ../genalg/test/generation_test.cpp
+
+    ../genalg/core/generation.cpp
+    ../genalg/core/generation.hpp
+
+    ../genalg/evolution/crossover/crossover.cpp
+    ../genalg/evolution/crossover/crossover.hpp
+    ../genalg/evolution/mutation/mutation.cpp
+    ../genalg/evolution/mutation/mutation.hpp
+    ../genalg/evolution/selection/selection.cpp
+    ../genalg/evolution/selection/selection.hpp
+    ../genalg/evolution/interface.hpp
+)
+
+add_executable(GA_Practice_Tests ${TEST_SOURCES})
+
+target_include_directories(GA_Practice_Tests PRIVATE ../genalg)
+target_link_libraries(GA_Practice_Tests PRIVATE GTest::GTest GTest::Main Qt${QT_VERSION_MAJOR}::Widgets)
+
+gtest_discover_tests(GA_Practice_Tests)
+
+
+set(GA_SOURCES
+	../genalg/main.cpp
+
+	../genalg/core/generation.cpp
+	../genalg/core/generation.hpp
+	../genalg/core/genetic.cpp
+	../genalg/core/genetic.hpp
+
+	../genalg/evolution/crossover/crossover.cpp
+	../genalg/evolution/crossover/crossover.hpp
+	../genalg/evolution/evaluator/evaluator.cpp
+	../genalg/evolution/evaluator/evaluator.hpp
+	../genalg/evolution/mutation/mutation.cpp
+	../genalg/evolution/mutation/mutation.hpp
+	../genalg/evolution/selection/selection.cpp
+	../genalg/evolution/selection/selection.hpp
+	../genalg/evolution/interface.hpp
+
+	../genalg/structures/polynomial.hpp
+)
+
+add_executable(GA_example ${GA_SOURCES})
+target_include_directories(GA_example PRIVATE ../genalg)
