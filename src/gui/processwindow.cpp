@@ -129,6 +129,7 @@ void ProcessWindow::setAccuracyPlot(QCustomPlot *plot, std::size_t cur_amount)
 
 void ProcessWindow::on_goToFinishButton_clicked()
 {
+	cur_amount = gen_amount;
 	std::vector<generation_t> best_solutions;
 	for (const auto &sol : solution)
 	{
