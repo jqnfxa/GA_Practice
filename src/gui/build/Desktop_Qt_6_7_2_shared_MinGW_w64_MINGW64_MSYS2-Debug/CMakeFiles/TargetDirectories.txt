@@ -1,9 +1,0 @@
-D:/qt projects/ga_practice_6/build/Desktop_Qt_6_7_2_shared_MinGW_w64_MINGW64_MSYS2-Debug/CMakeFiles/ga_practice_6.dir
-D:/qt projects/ga_practice_6/build/Desktop_Qt_6_7_2_shared_MinGW_w64_MINGW64_MSYS2-Debug/CMakeFiles/edit_cache.dir
-D:/qt projects/ga_practice_6/build/Desktop_Qt_6_7_2_shared_MinGW_w64_MINGW64_MSYS2-Debug/CMakeFiles/rebuild_cache.dir
-D:/qt projects/ga_practice_6/build/Desktop_Qt_6_7_2_shared_MinGW_w64_MINGW64_MSYS2-Debug/CMakeFiles/list_install_components.dir
-D:/qt projects/ga_practice_6/build/Desktop_Qt_6_7_2_shared_MinGW_w64_MINGW64_MSYS2-Debug/CMakeFiles/install.dir
-D:/qt projects/ga_practice_6/build/Desktop_Qt_6_7_2_shared_MinGW_w64_MINGW64_MSYS2-Debug/CMakeFiles/install/local.dir
-D:/qt projects/ga_practice_6/build/Desktop_Qt_6_7_2_shared_MinGW_w64_MINGW64_MSYS2-Debug/CMakeFiles/install/strip.dir
-D:/qt projects/ga_practice_6/build/Desktop_Qt_6_7_2_shared_MinGW_w64_MINGW64_MSYS2-Debug/CMakeFiles/ga_practice_6_autogen_timestamp_deps.dir
-D:/qt projects/ga_practice_6/build/Desktop_Qt_6_7_2_shared_MinGW_w64_MINGW64_MSYS2-Debug/CMakeFiles/ga_practice_6_autogen.dir
