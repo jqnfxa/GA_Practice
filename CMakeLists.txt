@@ -9,8 +9,8 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets LinguistTools Core Gui PrintSupport)
-find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets LinguistTools Core Gui PrintSupport)
+find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets LinguistTools Core Gui PrintSupport Charts)
+find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets LinguistTools Core Gui PrintSupport Charts)
 
 set(TS_FILES ga_practice_6_ru_RU.ts)
 
@@ -19,6 +19,22 @@ set(PROJECT_SOURCES
 	src/gui/mainwindow.cpp
 	src/gui/mainwindow.h
 	src/gui/mainwindow.ui
+	src/genalg/core/generation.cpp
+	src/genalg/core/generation.hpp
+	src/genalg/core/genetic.cpp
+	src/genalg/core/genetic.hpp
+
+	src/genalg/evolution/crossover/crossover.cpp
+	src/genalg/evolution/crossover/crossover.hpp
+	src/genalg/evolution/evaluator/evaluator.cpp
+	src/genalg/evolution/evaluator/evaluator.hpp
+	src/genalg/evolution/mutation/mutation.cpp
+	src/genalg/evolution/mutation/mutation.hpp
+	src/genalg/evolution/selection/selection.cpp
+	src/genalg/evolution/selection/selection.hpp
+	src/genalg/evolution/interface.hpp
+
+	src/genalg/structures/polynomial.hpp
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
@@ -33,6 +49,22 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
 	src/gui/finishwindow.cpp
 	src/gui/qcustomplot.h
 	src/gui/qcustomplot.cpp
+	src/genalg/core/generation.cpp
+	src/genalg/core/generation.hpp
+	src/genalg/core/genetic.cpp
+	src/genalg/core/genetic.hpp
+
+	src/genalg/evolution/crossover/crossover.cpp
+	src/genalg/evolution/crossover/crossover.hpp
+	src/genalg/evolution/evaluator/evaluator.cpp
+	src/genalg/evolution/evaluator/evaluator.hpp
+	src/genalg/evolution/mutation/mutation.cpp
+	src/genalg/evolution/mutation/mutation.hpp
+	src/genalg/evolution/selection/selection.cpp
+	src/genalg/evolution/selection/selection.hpp
+	src/genalg/evolution/interface.hpp
+
+	src/genalg/structures/polynomial.hpp
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET ga_practice_6 APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
@@ -58,13 +90,30 @@ else()
             src/gui/finishwindow.cpp
             src/gui/qcustomplot.h
             src/gui/qcustomplot.cpp
+	    src/genalg/core/generation.cpp
+	    src/genalg/core/generation.hpp
+	    src/genalg/core/genetic.cpp
+	    src/genalg/core/genetic.hpp
+
+	    src/genalg/evolution/crossover/crossover.cpp
+	    src/genalg/evolution/crossover/crossover.hpp
+	    src/genalg/evolution/evaluator/evaluator.cpp
+	    src/genalg/evolution/evaluator/evaluator.hpp
+	    src/genalg/evolution/mutation/mutation.cpp
+	    src/genalg/evolution/mutation/mutation.hpp
+	    src/genalg/evolution/selection/selection.cpp
+	    src/genalg/evolution/selection/selection.hpp
+	    src/genalg/evolution/interface.hpp
+
+	    src/genalg/structures/polynomial.hpp
         )
     endif()
 
     qt5_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${TS_FILES})
 endif()
 
-target_link_libraries(ga_practice_6 PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::PrintSupport)
+target_include_directories(ga_practice_6 PRIVATE src/genalg)
+target_link_libraries(ga_practice_6 PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::PrintSupport Qt5::Charts)
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
 # If you are developing for iOS or macOS you should consider setting an
@@ -123,7 +172,7 @@ gtest_discover_tests(GA_Practice_Tests)
 
 
 set(GA_SOURCES
-src/genalg/main.cpp
+	src/genalg/main.cpp
 
 	src/genalg/core/generation.cpp
 	src/genalg/core/generation.hpp

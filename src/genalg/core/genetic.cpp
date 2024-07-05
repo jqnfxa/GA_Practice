@@ -14,11 +14,17 @@ GeneticAlgorithmReport::GeneticAlgorithmReport(
 double GeneticAlgorithmReport::accuracy(double best) const
 {
 	double sum_accuracy = 0;
-	for (const auto gen : best_individuals_)
-	{	
-		sum_accuracy += std::fabs(best - gen)/(std::fabs(best) + std::fabs(gen));
+
+	for (const auto &gen : best_individuals_)
+	{
+		sum_accuracy += std::fabs(best - gen) / (std::fabs(best) + std::fabs(gen));
 	}
-	return 1.0 - sum_accuracy/best_individuals_.size();
+
+	sum_accuracy /= best_individuals_.size();
+	sum_accuracy = 1.0 - sum_accuracy;
+	sum_accuracy = std::max(sum_accuracy, 0.0);
+	sum_accuracy = std::min(sum_accuracy, 1.0);
+	return sum_accuracy;
 }
 
 
@@ -128,7 +134,7 @@ std::vector<std::vector<GeneticAlgorithmReport>> GeneticAlgorithm::run(std::size
 
 bool GeneticAlgorithm::is_maximum(genom_t genom) const
 {
-	const auto epsilon = 0.1;
+	const auto epsilon = 0.001f;
 	const auto left = polynomial_(genom) - polynomial_(genom - epsilon);
 	const auto right = polynomial_(genom) - polynomial_(genom + epsilon);
 

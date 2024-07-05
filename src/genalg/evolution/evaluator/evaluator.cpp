@@ -14,7 +14,7 @@ double PolynomialEvaluator::evaluate(const genom_t &genom) const
 
 	for (const auto &constraint : constraints_)
 	{
-		penalty += 1.0 / std::fabs(genom - constraint);
+		penalty += 1.0 / std::pow(std::fabs(genom - constraint), 1.5);
 	}
 
 	return polynomial_(genom) - penalty;

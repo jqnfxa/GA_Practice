@@ -4,6 +4,7 @@
 
 #include <QWidget>
 #include "qcustomplot.h"
+#include "evolution/interface.hpp"
 
 namespace Ui {
 class FinishWindow;
@@ -17,6 +18,7 @@ public:
     explicit FinishWindow(QWidget *parent = 0);
     ~FinishWindow();
 
+    void setSolution(const std::vector<generation_t> &best_solutions, QCustomPlot *accuracy_plot);
 signals:
     void closeSolution();
 

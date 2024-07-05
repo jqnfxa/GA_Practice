@@ -43,7 +43,7 @@ public:
 		const Polynomial<genom_t> &polynomial
 	);
 
-	std::vector<std::vector<GeneticAlgorithmReport>> run(std::size_t count = 5);
+	std::vector<std::vector<GeneticAlgorithmReport>> run(std::size_t count = 3);
 	std::vector<generation_t> find_solution(double left, double right);
 	std::vector<genom_t> best_solution(const generation_t &generation, std::size_t count = 3) const;
 	bool is_maximum(genom_t genom) const;

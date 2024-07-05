@@ -1,6 +1,16 @@
 #include "mainwindow.h"
 #include "./ui_mainwindow.h"
+#include "structures/polynomial.hpp"
+#include "evolution/interface.hpp"
+#include "evolution/selection/selection.hpp"
+#include "evolution/mutation/mutation.hpp"
+#include "evolution/crossover/crossover.hpp"
+#include "core/generation.hpp"
+#include "core/genetic.hpp"
+#include "util/random.hpp"
 #include <cmath>
+#include <numeric>
+
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -54,18 +64,21 @@ MainWindow::~MainWindow()
 
 void MainWindow::randomFill()
 {
-    ui->x0coef->setText(QString::number(double(rand())/rand() - double(rand())/rand()));
-    ui->x1coef->setText(QString::number(double(rand())/rand() - double(rand())/rand()));
-    ui->x2coef->setText(QString::number(double(rand())/rand() - double(rand())/rand()));
-    ui->x3coef->setText(QString::number(double(rand())/rand() - double(rand())/rand()));
-    ui->x4coef->setText(QString::number(double(rand())/rand() - double(rand())/rand()));
-    ui->x5coef->setText(QString::number(double(rand())/rand() - double(rand())/rand()));
-    ui->leftrange->setText(QString::number(-double(rand())/rand()));
-    ui->rightrange->setText(QString::number(double(rand())/rand()));
-    ui->genamount->setText(QString::number(rand()%100));
-    ui->startamount->setText(QString::number(rand()%100));
-    ui->mixchance->setText(QString::number(rand()%100));
-    ui->mutationchance->setText(QString::number(rand()%100));
+	double min_coefficient = -1000;
+	double max_coefficient = 1000;
+
+	ui->x0coef->setText(QString::number(rnd(min_coefficient, max_coefficient)));
+	ui->x1coef->setText(QString::number(rnd(min_coefficient, max_coefficient)));
+	ui->x2coef->setText(QString::number(rnd(min_coefficient, max_coefficient)));
+	ui->x3coef->setText(QString::number(rnd(min_coefficient, max_coefficient)));
+	ui->x4coef->setText(QString::number(rnd(min_coefficient, max_coefficient)));
+	ui->x5coef->setText(QString::number(rnd(min_coefficient, max_coefficient)));
+	ui->leftrange->setText(QString::number(rnd<double>(-15, 0)));
+	ui->rightrange->setText(QString::number(rnd<double>(0, 15)));
+	ui->genamount->setText(QString::number(rnd<int>(5, 25)));
+	ui->startamount->setText(QString::number(rnd<int>(10, 100)));
+	ui->mixchance->setText(QString::number(rnd<double>(0, 1)));
+	ui->mutationchance->setText(QString::number(rnd<double>(0, 1)));
 }
 
 void MainWindow::fillFromFile()
@@ -127,10 +140,13 @@ void MainWindow::on_solveButton_clicked()
     rangeLeft = ui->leftrange->toPlainText().toDouble();
     rangeRight = ui->rightrange->toPlainText().toDouble();
     mixChance = ui->mixchance->toPlainText().toDouble();
-    if (mixChance <= 0) mixChance = 0.9;
-
     mutChance = ui->mutationchance->toPlainText().toDouble();
-    if (mutChance <= 0) mutChance = 0.05;
+
+    mixChance = std::min(1.0, mixChance);
+    mixChance = std::max(0.0, mixChance);
+
+    mutChance = std::min(1.0, mutChance);
+    mutChance = std::max(0.0, mutChance);
 
     startAmount = ui->startamount->toPlainText().toInt();
     if (startAmount <= 0) startAmount = 10;
@@ -138,29 +154,22 @@ void MainWindow::on_solveButton_clicked()
     genAmount = ui->genamount->toPlainText().toInt();
     if (genAmount <= 0) genAmount = 10;
 
-    //подключение либу
-    //делаю тут объект geneticalgorithm с этими кэфами
-    //метод run который возвращает массив всех экстремумов, где каждый экстремум массив всех поколений
-    //мы это сохраняем для отрисовки
-    //c помощью метода best solutions получаем три лучших решения
-    //берем accuracy как среднее на поколение
+    Polynomial<double> polynomial(coefs);
+    GeneticAlgorithm algorithm(
+	startAmount,
+	genAmount,
+        mutChance,
+        mixChance,
+        new RouletteWheel,
+        new MixerCrossover(0.5, rangeLeft, rangeRight),
+	new SubstanceMutation(rangeLeft, rangeRight),
+        new PolynomialEvaluator(polynomial),
+	rangeLeft,
+	rangeRight,
+	polynomial
+    );
 
-
-    QVector<double> x,y;
-    for(double i = rangeLeft; i < rangeRight; i += 0.01)
-    {
-        double temp = coefs[0]+coefs[1]*i+coefs[2]*pow(i, 2)+coefs[3]*pow(i, 3)+coefs[4]*pow(i, 4)+coefs[5]*pow(i, 5);
-        x.push_back(i);
-        y.push_back(temp);
-    }
-
-    plot->addGraph();
-    plot->graph(0)->setData(x, y);
-    plot->xAxis->setRange(rangeLeft, rangeRight);
-    plot->replot();
-
-    // go to solution process step
-    process->setGenAmount(genAmount);
+    process->setData(algorithm.run(3), polynomial, rangeLeft, rangeRight, genAmount);
     process->show();
 }
 
@@ -181,13 +190,9 @@ void MainWindow::on_setGraphButton_triggered(QAction *arg1)
 
 void MainWindow::on_drawReaden_clicked()
 {
-    qDebug() << "ew";
-
     // handle data for GA
     std::vector<double> coefs;
     double rangeLeft, rangeRight;
-    double mixChance, mutChance;
-    int startAmount, genAmount;
     coefs.push_back(ui->x0coef->toPlainText().toDouble());
     coefs.push_back(ui->x1coef->toPlainText().toDouble());
     coefs.push_back(ui->x2coef->toPlainText().toDouble());
@@ -196,29 +201,27 @@ void MainWindow::on_drawReaden_clicked()
     coefs.push_back(ui->x5coef->toPlainText().toDouble());
     rangeLeft = ui->leftrange->toPlainText().toDouble();
     rangeRight = ui->rightrange->toPlainText().toDouble();
-    mixChance = ui->mixchance->toPlainText().toDouble();
-    if (mixChance <= 0) mixChance = 0.9;
-
-    mutChance = ui->mutationchance->toPlainText().toDouble();
-    if (mutChance <= 0) mutChance = 0.05;
-
-    startAmount = ui->startamount->toPlainText().toInt();
-    if (startAmount <= 0) startAmount = 10;
-
-    genAmount = ui->genamount->toPlainText().toInt();
-    if (genAmount <= 0) genAmount = 10;
 
     QVector<double> x,y;
+    double min_value = std::numeric_limits<double>::max();
+    double max_value = std::numeric_limits<double>::min();
+
     for(double i = rangeLeft; i < rangeRight; i += 0.01)
     {
-        double temp = coefs[0]+coefs[1]*i+coefs[2]*pow(i, 2)+coefs[3]*pow(i, 3)+coefs[4]*pow(i, 4)+coefs[5]*pow(i, 5);
+	double temp = coefs[0]+coefs[1]*i+coefs[2]*pow(i, 2)+coefs[3]*pow(i, 3)+coefs[4]*pow(i, 4)+coefs[5]*pow(i, 5);
         x.push_back(i);
         y.push_back(temp);
+
+	min_value = std::min(min_value, temp);
+	max_value = std::max(max_value, temp);
     }
 
+    plot->yAxis->setRange(min_value, max_value);
+    plot->addGraph();
     plot->addGraph();
     plot->graph(0)->setData(x, y);
     plot->xAxis->setRange(rangeLeft, rangeRight);
     plot->replot();
+
 }
 
