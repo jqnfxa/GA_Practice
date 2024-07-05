@@ -55,7 +55,7 @@ void ProcessWindow::setData(const std::vector<std::vector<GeneticAlgorithmReport
 		plotPolinom->addGraph();
 		plotEvalFunc->addGraph();
 		const auto color = QColor(random<int>(50, 200), random<int>(50, 200), random<int>(50, 200));
-		pens.push_back(QPen(color, 10));
+		pens.push_back(QPen(color, 3));
 		plot_pens.push_back(QPen(color, 2));
 	}
 	plotPolinom->addGraph();

@@ -9,8 +9,8 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets LinguistTools Core Gui PrintSupport)
-find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets LinguistTools Core Gui PrintSupport)
+find_package(QT NAMES Qt5 REQUIRED COMPONENTS Widgets LinguistTools Core Gui PrintSupport Charts)
+find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets LinguistTools Core Gui PrintSupport Charts)
 
 set(TS_FILES ga_practice_6_ru_RU.ts)
 
@@ -113,7 +113,7 @@ else()
 endif()
 
 target_include_directories(ga_practice_6 PRIVATE src/genalg)
-target_link_libraries(ga_practice_6 PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::PrintSupport Qt5::Charts)
+target_link_libraries(ga_practice_6 PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::PrintSupport Qt${QT_VERSION_MAJOR}::Charts)
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
 # If you are developing for iOS or macOS you should consider setting an
@@ -168,7 +168,7 @@ src/genalg/test/runner.cpp
 add_executable(GA_Practice_Tests ${TEST_SOURCES})
 
 target_include_directories(GA_Practice_Tests PRIVATE src/genalg)
-target_link_libraries(GA_Practice_Tests PRIVATE GTest::GTest GTest::Main Qt${QT_VERSION_MAJOR}::Widgets)
+target_link_libraries(GA_Practice_Tests PRIVATE GTest::GTest GTest::Main Qt${QT_VERSION_MAJOR}::Widgets Qt5::Charts)
 
 gtest_discover_tests(GA_Practice_Tests)
 
